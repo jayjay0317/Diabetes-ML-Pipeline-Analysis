@@ -6,8 +6,11 @@ MODEL_PATH = '../notebooks/diabetes_rf_model.pkl'
 
 def run_test():
     # Initialize the predictor
-    predictor = DiabetesPredictor(MODEL_PATH)
+    predictor = DiabetesPredictor()
 
+    # Load the model
+    predictor.load_model(MODEL_PATH)
+    
     # Create dummy patient data with 21 features (matching X_train)
     sample_data = [0.0] * 21
 
