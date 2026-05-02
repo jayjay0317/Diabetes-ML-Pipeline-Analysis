@@ -3,9 +3,10 @@ from model_handler import DiabetesPredictor
 
 app = Flask(__name__)
 
-# Initialize the predictor with the saved model path
+# Initialize and load the predictor
 MODEL_PATH = "../notebooks/diabetes_rf_model.pkl"
-predictor = DiabetesPredictor(MODEL_PATH)
+predictor = DiabetesPredictor()
+predictor.load_model(MODEL_PATH)
 
 @app.route('/')
 def home():
