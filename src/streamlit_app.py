@@ -26,6 +26,12 @@ age_labels = {
     11: "70-74", 12: "75-79", 13: "80+"
 }
 
+# Map numeric general health categories to human-readable stgrings
+genhlth_labels = {
+    1: 'Excellent', 2: 'Very good', 3: 'Good', 4: 'Fair',
+    5: 'Poor'
+}
+
 # Input form for user data
 with st.form('diabetes_form'):
     st.subheader('User Health Indicators')
@@ -37,6 +43,12 @@ with st.form('diabetes_form'):
         options=list(age_labels.keys()), 
         value=5,
         format_func=lambda x: age_labels[x]
+    )
+    genhlth = st.select_slider(
+        'General Health',
+        options=list(genhlth_labels.keys()),
+        value=3,
+        format_func=lambda x: genhlth_labels[x]
     )
     high_bp = st.selectbox(
         'High Blood Pressure',
