@@ -18,6 +18,7 @@ class DiabetesPredictor:
         """
         Load the pre-trained model and extract feature names.
         """
+        self.model = joblib.load(model_path)
         try:
             self.feature_names = self.model.feature_names_in_
         except AttributeError:

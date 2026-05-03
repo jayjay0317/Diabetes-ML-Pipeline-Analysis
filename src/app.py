@@ -4,7 +4,7 @@ from model_handler import DiabetesPredictor
 app = Flask(__name__)
 
 # Initialize and load the predictor
-MODEL_PATH = "../notebooks/diabetes_rf_model.pkl"
+MODEL_PATH = "notebooks/diabetes_rf_model.pkl"
 predictor = DiabetesPredictor()
 predictor.load_model(MODEL_PATH)
 
