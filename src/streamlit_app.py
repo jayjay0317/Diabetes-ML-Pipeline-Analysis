@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 from model_handler import DiabetesPredictor
 
 # Page configuration
@@ -18,7 +19,7 @@ predictor = get_predictor()
 st.title('🏥 Diabetes Risk Predictor')
 st.write('Please enter your health indicators to check the diabetes risk level.')
 
-# Age category mapping for better UX
+# Map numeric age categories to human-readable strings
 age_labels = {
     1: "18-24", 2: "25-29", 3: "30-34", 4: "35-39", 5: "40-44",
     6: "45-49", 7: "50-54", 8: "55-59", 9: "60-64", 10: "65-69",
@@ -32,8 +33,9 @@ with st.form('diabetes_form'):
     # Input widgets for key features
     bmi = st.slider('BMI (Body Mass Index)', 10.0, 60.0, 25.0)
     age = st.select_slider(
-        'Age Category',
-        options=list(age_labels.keys()), value=5,
+        'Age Range',
+        options=list(age_labels.keys()), 
+        value=5,
         format_func=lambda x: age_labels[x]
     )
     high_bp = st.selectbox(
@@ -49,10 +51,23 @@ with st.form('diabetes_form'):
 if submitted:
     # Feature engineering: matching the 21 input features required by the model
     # Placeholders (0) are used for the remaining 18 features for now
-    features = [high_bp, 0, 0, bmi, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, age, 0, 0]
+    # Define exact column names used during training
+    column_names = [
+        'HighBP', 'HighChol', 'CholCheck', 'BMI', 'Smoker', 'Stroke',
+        'HeartDiseaseorAttack', 'PhysActivity', 'Fruits', 'Veggies',
+        'HvyAlcoholConsump', 'AnyHealthcare', 'NoDocbcCost', 'GenHlth',
+        'MentHlth', 'PhysHlth', 'DiffWalk', 'Sex', 'Age', 'Education', 'Income'
+    ]
 
+    # Creat a DataFrame to ensure the pipeline identifies features by name
+    input_df = pd.DataFrame([[0.0] * 21], columns=column_names)
+
+    input_df.at[0, 'HighBP'] = float(high_bp)
+    input_df.at[0, 'BMI'] = float(bmi) # Pipeline will apply log1p and scaling
+    input_df.at[0, 'Age'] = float(age) # Pipeline will apply scaling
+     
     # Perform prediction (returns the first element directly)
-    prediction = predictor.predict(features)
+    prediction = predictor.predict(input_df)
 
     # Display results with visual feedback
     if prediction == 1:

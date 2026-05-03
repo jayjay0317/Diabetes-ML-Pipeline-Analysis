@@ -25,13 +25,14 @@ class DiabetesPredictor:
             self.feature_names = None
         print(f'Successfully loaded model from: {model_path}')
     
-    def predict(self, features):
+    def predict(self, data):
         """
         Predict the target class based on input features.
-        Convert input list to DataFrame before performing prediction.
+        If data is already a DataFrame, use it directly.
+        If it is a list, convert it to a DataFrame with feature names.
         """
-        # Create a DataFrame because the model expects feature names
-        data = pd.DataFrame([features], columns=self.feature_names)
+        if not isinstance(data, pd.DataFrame):
+            data = pd.DataFrame([data], columns=self.feature_names)
         prediction = self.model.predict(data)
-        # Return the first element of the prediction array
+        
         return prediction[0]
