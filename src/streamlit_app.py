@@ -77,6 +77,7 @@ if submitted:
     input_df.at[0, 'HighBP'] = float(high_bp)
     input_df.at[0, 'BMI'] = float(bmi) # Pipeline will apply log1p and scaling
     input_df.at[0, 'Age'] = float(age) # Pipeline will apply scaling
+    input_df.at[0, 'GenHlth'] = float(genhlth)
      
     # Perform prediction (returns the first element directly)
     prediction = predictor.predict(input_df)
