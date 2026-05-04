@@ -167,14 +167,14 @@ if submitted:
     # Render bar chart with explicit sorting to prevent alphabetical order
     chart = alt.Chart(importance_df).mark_bar().encode(
         x=alt.X('Feature', sort='-y', title='Health Factors'),
-        y=alt.Y('Importance', title='Impact Weight'),
+        y=alt.Y('Importance', title='Global Impact Weight'),
         color=alt.Color('Importance', scale=alt.Scale(scheme='blues'), legend=None)
     )
 
     st.altair_chart(chart, use_container_width=True)
 
     st.info("""
-**Top Risk Drivers:** The chart above shows which health factors the AI prioritized 
-when calculating your specific result. Factors like GenHlth, HighBP, and BMI 
-typically play the largest roles in this model's decision-making.
-""")
+            **Global Feature Importance**
+            The chart above shows the general criteria that AI uses to evaluate health risks across all patients.
+            Factors like GenHlth and HighBP are universally the strongest predictors in this model.
+            """)
