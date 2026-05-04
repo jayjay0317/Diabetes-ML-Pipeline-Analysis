@@ -75,6 +75,46 @@ with st.form('diabetes_form'):
             'Difficulty Walking', ['No', 'Yes'], 
             help='Do you have serious difficulty walking or climbing stairs?'
             )
+    
+    st.markdown('---')
+    st.subheader('Lifestyle & Socioeconomic Factors')
+
+    col3, col4 = st.columns(2)
+
+    with col3:
+        smoker = st.radio(
+            'Smoker', ['No', 'Yes'],
+            help='Have you smoked at least 100 cigarettes in your life?'
+            )
+        ment_hlth = st.slider(
+            'Mental Health (Poor Days)', 0, 30, 0,
+            help='Days in past 30 days your mental health was not good')
+    
+    with col4:
+        # Map numeric categories to descriptive labels
+        edu_labels = {
+            1: 'Never attended school', 2: 'Grades 1-8 (Elementary)',
+            3: 'Grades 9-11 (Some high school)', 4: 'High school graduate', 
+            5: 'Some college or technical school', 6: 'College graduate'
+        }
+        education = st.selectbox(
+            'Education Level',
+            options=[1, 2, 3, 4, 5, 6],
+            format_func=lambda x: edu_labels[x],
+            index=5 # Default to College graduate
+        )
+
+        inc_labels = {
+            1: 'Less than $10,000', 2: '$10K - $15K', 3: '$15K - $20K', 
+            4: '$20K - $25K', 5: '$25K - $35K', 6: '$35K - $50K', 
+            7: '$50K - $75K', 8: '$75,000 or more'
+        }
+        income = st.selectbox(
+            'Income Level',
+            options=[1, 2, 3, 4, 5, 6, 7, 8],
+            format_func=lambda x: inc_labels[x],
+            index=7 # Default to highest income bracket
+        )
 
     # Form submission button
     submitted = st.form_submit_button('Predict Result')
@@ -101,7 +141,11 @@ if submitted:
     input_df.at[0, 'HighChol'] = 1.0 if high_chol == 'Yes' else 0.0
     input_df.at[0, 'PhysActivity'] = 1.0 if phys_activity == 'Yes' else 0.0
     input_df.at[0, 'DiffWalk'] = 1.0 if diff_walk == 'Yes' else 0.0
-     
+    input_df.at[0, 'Smoker'] = 1.0 if smoker == "Yes" else 0.0
+    input_df.at[0, 'MentHlth'] = float(ment_hlth)
+    input_df.at[0, 'Education'] = float(education)
+    input_df.at[0, 'Income'] = float(income)
+
     # Perform prediction (returns the first element directly)
     prediction = predictor.predict(input_df)
 
