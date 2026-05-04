@@ -109,3 +109,19 @@ if submitted:
         st.error('⚠️ High Risk: Clinical consultation is recommended.')
     else:
         st.success('✅ Low Risk: Maintain your healthy lifestyle!')
+
+    # --- Feature Importance Visualization ---
+    st.markdown('---')
+    st.subheader('📊 What factors influenced your risk?')
+
+    # Top 10 most influential features for the current model
+    importances = predictor.get_feature_importance().head(10)
+
+    # Bar chart to visualize the impact of each health indicator
+    st.bar_chart(importances)
+
+    st.info("""
+**Top Risk Drivers:** The chart above shows which health factors the AI prioritized 
+when calculating your specific result. Factors like GenHlth, HighBP, and BMI 
+typically play the largest roles in this model's decision-making.
+""")

@@ -20,7 +20,16 @@ class DiabetesPredictor:
         """
         self.model = joblib.load(model_path)
         try:
-            self.feature_names = self.model.feature_names_in_
+            self.feature_names = [
+            'BMI',                               # Skewed feature
+            'GenHlth', 'MentHlth', 'PhysHlth',   # Numerical/Ordinal features
+            'Age', 'Education', 'Income',
+            'HighBP', 'HighChol', 'CholCheck',   # Binary features
+            'Smoker', 'Stroke', 'HeartDiseaseorAttack', 
+            'PhysActivity', 'Fruits', 'Veggies', 
+            'HvyAlcoholConsump', 'AnyHealthcare', 
+            'NoDocbcCost', 'DiffWalk', 'Sex'
+            ]
         except AttributeError:
             self.feature_names = None
         print(f'Successfully loaded model from: {model_path}')
@@ -36,3 +45,18 @@ class DiabetesPredictor:
         prediction = self.model.predict(data)
         
         return prediction[0]
+    
+    def get_feature_importance(self):
+        """
+        Extracts and returns feature importances from the trained pipeline 
+        as a sorted pandas Series.
+        """
+        # Access the classifier from the last step of the pipeline
+        importances = self.model.named_steps['classifier'].feature_importances_
+
+        # Map importances to their corresponding feature names
+        # Note: feature_names follows the concatenation order of the preprocessor 
+        # (skewed -> num_ord -> binary)
+        importance_series = pd.Series(importances, index=self.feature_names)
+
+        return importance_series.sort_values(ascending=False)
