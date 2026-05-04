@@ -178,3 +178,19 @@ if submitted:
             The chart above shows the general criteria that AI uses to evaluate health risks across all patients.
             Factors like GenHlth and HighBP are universally the strongest predictors in this model.
             """)
+    
+st.markdown('---')
+
+# Use expander to hide technical metrics from general users but keep them accessible for reviewers
+with st.expander('🔍 Model Performance Metrics (For Reviewers)'):
+    st.write('This section provides quantitative evaluation metrics of the trained Random Forest model.')
+
+    # Display metrics neatly in a row
+    col1, col2, col3, col4 = st.columns(4)
+
+    col1.metric('Accuracy', '75.0%')
+    col2.metric('ROC-AUC', '0.811')
+    col3.metric('Precision', '38.0%')
+    col4.metric('Recall', '69.0%')
+
+    st.info('The model was trained on the BRFSS dataset using a Random Forest algorithm with a comprehensive preprocessing pipeline.')
