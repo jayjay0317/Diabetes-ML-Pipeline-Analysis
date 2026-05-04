@@ -55,6 +55,25 @@ with st.form('diabetes_form'):
         [0, 1],
         format_func=lambda x: 'Yes' if x==1 else 'No'
     )
+    st.markdown('---')
+    st.subheader('Additional Health Indicators')
+
+    col1, col2 = st.columns(2)
+    with col1:
+        high_chol = st.radio(
+            'High Cholesterol', ['No', 'Yes'],
+            help='Has a doctor told you that your cholesterol is high?'
+            )
+        phys_activity = st.radio(
+            'Physical Activity', ['Yes', 'No'],
+            help='Any physical activity or exercise in the past 30 days?'
+            )
+        
+    with col2:
+        diff_walk = st.radio(
+            'Difficulty Walking', ['No', 'Yes'], 
+            help='Do you have serious difficulty walking or climbing stairs?'
+            )
 
     # Form submission button
     submitted = st.form_submit_button('Predict Result')
@@ -78,6 +97,9 @@ if submitted:
     input_df.at[0, 'BMI'] = float(bmi) # Pipeline will apply log1p and scaling
     input_df.at[0, 'Age'] = float(age) # Pipeline will apply scaling
     input_df.at[0, 'GenHlth'] = float(genhlth)
+    input_df.at[0, 'HighChol'] = 1.0 if high_chol == 'Yes' else 0.0
+    input_df.at[0, 'PhysActivity'] = 1.0 if phys_activity == 'Yes' else 0.0
+    input_df.at[0, 'DiffWalk'] = 1.0 if diff_walk == 'Yes' else 0.0
      
     # Perform prediction (returns the first element directly)
     prediction = predictor.predict(input_df)
@@ -86,4 +108,4 @@ if submitted:
     if prediction == 1:
         st.error('⚠️ High Risk: Clinical consultation is recommended.')
     else:
-        st.success("✅ Low Risk: Maintain your healthy lifestyle!")
+        st.success('✅ Low Risk: Maintain your healthy lifestyle!')
