@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import altair as alt
 from model_handler import DiabetesPredictor
 
 # Page configuration
@@ -114,11 +115,19 @@ if submitted:
     st.markdown('---')
     st.subheader('📊 What factors influenced your risk?')
 
-    # Top 10 most influential features for the current model
+    # Extract top 10 features and convert Series to DataFrame for Altair compatibility
     importances = predictor.get_feature_importance().head(10)
+    importance_df = importances.reset_index()
+    importance_df.columns = ['Feature', 'Importance']
 
-    # Bar chart to visualize the impact of each health indicator
-    st.bar_chart(importances)
+    # Render bar chart with explicit sorting to prevent alphabetical order
+    chart = alt.Chart(importance_df).mark_bar().encode(
+        x=alt.X('Feature', sort='-y', title='Health Factors'),
+        y=alt.Y('Importance', title='Impact Weight'),
+        color=alt.Color('Importance', scale=alt.Scale(scheme='blues'), legend=None)
+    )
+
+    st.altair_chart(chart, use_container_width=True)
 
     st.info("""
 **Top Risk Drivers:** The chart above shows which health factors the AI prioritized 
