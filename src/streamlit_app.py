@@ -146,14 +146,20 @@ if submitted:
     input_df.at[0, 'Education'] = float(education)
     input_df.at[0, 'Income'] = float(income)
 
-    # Perform prediction (returns the first element directly)
-    prediction = predictor.predict(input_df)
+    # Extract probability of the positive class (High Risk)
+    probabilities = predictor.predict_proba(input_df)
+    high_risk_prob = probabilities[1]
 
-    # Display results with visual feedback
-    if prediction == 1:
-        st.error('⚠️ High Risk: Clinical consultation is recommended.')
+    # Apply optimal threshold derived from CV Youden's J statistic
+    optimal_threshold = 0.419
+
+    # Display prediction results based on the custom threshold
+    if high_risk_prob >= optimal_threshold:
+        st.error(f'⚠️ High Risk (Probability {high_risk_prob * 100:.1f}%)')
+        st.write('Clinical consultation is recommended based on this screening.')
     else:
-        st.success('✅ Low Risk: Maintain your healthy lifestyle!')
+        st.success(f'✅ Low Risk (Probability {high_risk_prob * 100:.1f}%)')
+        st.write('Please maintain your current healthy lifestyle.')
 
     # --- Feature Importance Visualization ---
     st.markdown('---')
@@ -188,9 +194,9 @@ with st.expander('🔍 Model Performance Metrics (For Reviewers)'):
     # Display metrics neatly in a row
     col1, col2, col3, col4 = st.columns(4)
 
-    col1.metric('Accuracy', '75.0%')
-    col2.metric('ROC-AUC', '0.811')
-    col3.metric('Precision', '38.0%')
-    col4.metric('Recall', '69.0%')
+    col1.metric('Accuracy', '70.0%')
+    col2.metric('Recall', '79.0%')
+    col3.metric('Precision', '34.0%')
+    col4.metric('ROC-AUC', '0.811')
 
     st.info('The model was trained on the BRFSS dataset using a Random Forest algorithm with a comprehensive preprocessing pipeline.')

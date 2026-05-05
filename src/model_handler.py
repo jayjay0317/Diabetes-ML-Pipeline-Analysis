@@ -60,3 +60,14 @@ class DiabetesPredictor:
         importance_series = pd.Series(importances, index=self.feature_names)
 
         return importance_series.sort_values(ascending=False)
+    
+    def predict_proba(self, data):
+        """
+        Predict the probabilities of the target classes based on input features.
+        """
+        if not isinstance(data, pd.DataFrame):
+            data = pd.DataFrame([data], columns=self.feature_names)
+
+        probabilities = self.model.predict_proba(data)
+
+        return probabilities[0]
