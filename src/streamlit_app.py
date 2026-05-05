@@ -137,8 +137,9 @@ if submitted:
     # Calculate BMI
     if height_cm is None or weight_kg is None:
         st.warning('Please enter both your height and weight to proceed.')
-    else:    
-        bmi = weight_kg / ((height_cm / 100) ** 2)
+        st.stop()   
+
+    bmi = weight_kg / ((height_cm / 100) ** 2)
    
     # Feature engineering: matching the 21 input features required by the model
     # Placeholders (0) are used for the remaining 18 features for now
