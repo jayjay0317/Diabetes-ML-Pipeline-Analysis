@@ -38,7 +38,16 @@ with st.form('diabetes_form'):
     st.subheader('User Health Indicators')
 
     # Input widgets for key features
-    bmi = st.slider('BMI (Body Mass Index)', 10.0, 60.0, 25.0)
+    col_h, col_w = st.columns(2)
+    with col_h:
+        height_cm = st.number_input(
+            'Height (cm)', min_value=100.0, max_value=250.0, value=170.0,
+            step=1.0, help='Enter your height in centimeters')
+    with col_w:
+        weight_kg = st.number_input(
+            'Weight (kg)', min_value=30.0, max_value=200.0, value=70.0,
+            step=1.0, help='Enter your weight in kilograms')
+
     age = st.select_slider(
         'Age Range',
         options=list(age_labels.keys()), 
@@ -131,6 +140,9 @@ if submitted:
         'MentHlth', 'PhysHlth', 'DiffWalk', 'Sex', 'Age', 'Education', 'Income'
     ]
 
+    # Calculate BMI
+    bmi = weight_kg / ((height_cm / 100) ** 2)
+
     # Creat a DataFrame to ensure the pipeline identifies features by name
     input_df = pd.DataFrame([[0.0] * 21], columns=column_names)
 
@@ -156,6 +168,9 @@ if submitted:
     # Display prediction results based on the custom threshold
     st.markdown('---')
     st.subheader('🩺 Screening Result')
+
+    # Display calculated BMI
+    st.info(f'⚖️ Based on your height and weight, your calculated BMI is **{bmi:.1f}**.')
 
     # Convert probability to a 100 point Risk Score
     risk_score = high_risk_prob * 100
