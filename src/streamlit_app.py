@@ -14,6 +14,37 @@ def get_predictor_v2():
     predictor.load_model('notebooks/diabetes_rf_model.pkl')
     return predictor
 
+def map_age_to_category(age):
+    """
+    Map raw age to the 13-level category used in the BRFSS dataset.
+    """
+    if age < 25:
+        return 1.0
+    elif age < 30:
+        return 2.0
+    elif age < 35:
+        return 3.0
+    elif age < 40:
+        return 4.0
+    elif age < 45:
+        return 5.0
+    elif age < 50:
+        return 6.0
+    elif age < 55:
+        return 7.0
+    elif age < 60:
+        return 8.0
+    elif age < 65:
+        return 9.0
+    elif age < 70:
+        return 10.0
+    elif age < 75:
+        return 11.0
+    elif age < 80:
+        return 12.0
+    else:
+        return 13.0
+
 predictor = get_predictor_v2()
 
 # Header section
@@ -52,12 +83,11 @@ with st.form('diabetes_form'):
             placeholder='e.g. 60.3'
             )
 
-    age = st.select_slider(
-        'Age Range',
-        options=list(age_labels.keys()), 
-        value=5,
-        format_func=lambda x: age_labels[x]
+    age_input = st.number_input(
+        'Age', min_value=18, max_value=120, value=None,
+        step=1, placeholder='e.g. 35'
     )
+
     genhlth = st.select_slider(
         'General Health',
         options=list(genhlth_labels.keys()),
@@ -139,7 +169,12 @@ if submitted:
         st.warning('Please enter both your height and weight to proceed.')
         st.stop()   
 
+    if age_input is None:
+        st.warning('Please enter your age.')
+        st.stop()
+
     bmi = weight_kg / ((height_cm / 100) ** 2)
+    age = map_age_to_category(age_input)
    
     # Feature engineering: matching the 21 input features required by the model
     # Placeholders (0) are used for the remaining 18 features for now
