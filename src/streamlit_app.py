@@ -42,11 +42,11 @@ with st.form('diabetes_form'):
     with col_h:
         height_cm = st.number_input(
             'Height (cm)', min_value=100.0, max_value=250.0, value=170.0,
-            step=1.0, format='%.1f', help='Enter your height in centimeters')
+            step=0.0, format='%.1f', help='Enter your height in centimeters')
     with col_w:
         weight_kg = st.number_input(
             'Weight (kg)', min_value=30.0, max_value=200.0, value=70.0,
-            step=1.0, format='%.1f', help='Enter your weight in kilograms')
+            step=0.0, format='%.1f', help='Enter your weight in kilograms')
 
     age = st.select_slider(
         'Age Range',
