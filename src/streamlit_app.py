@@ -154,11 +154,29 @@ if submitted:
     optimal_threshold = 0.419
 
     # Display prediction results based on the custom threshold
+    st.markdown('---')
+    st.subheader('🩺 Screening Result')
+
+    # Convert probability to a 100 point Risk Score
+    risk_score = high_risk_prob * 100
+    threshold_score = optimal_threshold * 100
+
+    # Display prediction results based on the custom threshold
     if high_risk_prob >= optimal_threshold:
-        st.error(f'⚠️ High Risk (Probability {high_risk_prob * 100:.1f}%)')
+        st.error(f'⚠️ **High Risk** (Risk Score: {risk_score:.1f} / 100)')
+        st.progress(high_risk_prob) # Visual indicator
         st.write('Clinical consultation is recommended based on this screening.')
+
+        # Add an expandable explanation for users wondering about the score
+        with st.expander('💡 Why is this score considered High Risk?'):
+            st.write(f"""
+                     In our preventative screening model, the high-risk threshold is strictly set at **{threshold_score:.1f}**. 
+                     This is intentionally lower than 50 to cast a wider safety net (prioritizing Recall). 
+                     A score of {risk_score:.1f} means your health indicators share significant patterns with diagnosed patients, warranting early preventative care.
+                     """)
     else:
-        st.success(f'✅ Low Risk (Probability {high_risk_prob * 100:.1f}%)')
+        st.success(f'✅ **Low Risk** (Risk Score: {risk_score:.1f} / 100)')
+        st.progress(high_risk_prob) # Visual indicator
         st.write('Please maintain your current healthy lifestyle.')
 
     # --- Feature Importance Visualization ---
@@ -180,7 +198,7 @@ if submitted:
     st.altair_chart(chart, use_container_width=True)
 
     st.info("""
-            **Global Feature Importance**
+            **Global Feature Importance**\n
             The chart above shows the general criteria that AI uses to evaluate health risks across all patients.
             Factors like GenHlth and HighBP are universally the strongest predictors in this model.
             """)
