@@ -41,12 +41,16 @@ with st.form('diabetes_form'):
     col_h, col_w = st.columns(2)
     with col_h:
         height_cm = st.number_input(
-            'Height (cm)', min_value=100.0, max_value=250.0, value=170.0,
-            format='%.1f', help='Enter your height in centimeters')
+            'Height (cm)', min_value=100.0, max_value=250.0, value=None,
+            step=1.0, format='%.1f', help='Enter your height in centimeters',
+            placeholder='e.g. 170.5'
+            )
     with col_w:
         weight_kg = st.number_input(
-            'Weight (kg)', min_value=30.0, max_value=200.0, value=70.0,
-            format='%.1f', help='Enter your weight in kilograms')
+            'Weight (kg)', min_value=30.0, max_value=200.0, value=None,
+            step=1.0, format='%.1f', help='Enter your weight in kilograms',
+            placeholder='e.g. 60.3'
+            )
 
     age = st.select_slider(
         'Age Range',
@@ -130,6 +134,12 @@ with st.form('diabetes_form'):
 
 # Inference logic upon form submission
 if submitted:
+    # Calculate BMI
+    if height_cm is None or weight_kg is None:
+        st.warning('Please enter both your height and weight to proceed.')
+    else:    
+        bmi = weight_kg / ((height_cm / 100) ** 2)
+   
     # Feature engineering: matching the 21 input features required by the model
     # Placeholders (0) are used for the remaining 18 features for now
     # Define exact column names used during training
@@ -139,9 +149,6 @@ if submitted:
         'HvyAlcoholConsump', 'AnyHealthcare', 'NoDocbcCost', 'GenHlth',
         'MentHlth', 'PhysHlth', 'DiffWalk', 'Sex', 'Age', 'Education', 'Income'
     ]
-
-    # Calculate BMI
-    bmi = weight_kg / ((height_cm / 100) ** 2)
 
     # Creat a DataFrame to ensure the pipeline identifies features by name
     input_df = pd.DataFrame([[0.0] * 21], columns=column_names)
