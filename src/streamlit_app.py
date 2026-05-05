@@ -9,12 +9,12 @@ st.set_page_config(page_title='Diabetes Risk Predictor', layout='centered')
 
 # Load model with caching to prevent redundant loading
 @st.cache_resource
-def get_predictor():
+def get_predictor_v2():
     predictor = DiabetesPredictor()
     predictor.load_model('notebooks/diabetes_rf_model.pkl')
     return predictor
 
-predictor = get_predictor()
+predictor = get_predictor_v2()
 
 # Header section
 st.title('🏥 Diabetes Risk Predictor')
