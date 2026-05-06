@@ -67,13 +67,24 @@ The dashboard provides **Global Feature Importance** visualizations using Altair
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/jayjay0317/Diabetes-ML-Pipeline-Analysis.git
+   # Navigate into the project directory
+   cd Diabetes-ML-Pipeline-Analysis
    ```
-2. **Launch the Streamlit App**:
+
+2. **Install Dependencies**:
     ```bash
+    # Install required libraries for the project
+    pip install -r requirements.txt
+    ```
+
+3. **Launch the Streamlit App**:
+    ```bash
+    # Start the interactive web interface
     streamlit run src/streamlit_app.py
     ```
-3. **Test the Flask API**:
+4. **Test the Flask API**:
     ```bash
+    # Start the Flask backend server for REST API testing
     python src/app.py
     ```
 
