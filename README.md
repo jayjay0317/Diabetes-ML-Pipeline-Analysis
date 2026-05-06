@@ -66,16 +66,16 @@ The dashboard provides **Global Feature Importance** visualizations using Altair
 
 1. **Clone the Repository**:
    ```bash
-   git clone [https://github.com/jayjay0317/Diabetes-ML-Pipeline-Analysis.git](https://github.com/jayjay0317/Diabetes-ML-Pipeline-Analysis.git)
-
+   git clone https://github.com/jayjay0317/Diabetes-ML-Pipeline-Analysis.git
+   ```
 2. **Launch the Streamlit App**:
     ```bash
     streamlit run src/streamlit_app.py
-
+    ```
 3. **Test the Flask API**:
     ```bash
     python src/app.py
-
+    ```
 
 
 - log1p for mathematical safety
