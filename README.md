@@ -1,5 +1,37 @@
 # 🏥 Diabetes Health Indicators Analysis & Deployment
-An end-to-end machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical real-world challenges: severe class imbalance, non-linear clinical feature interactions, and UX-driven model serving.
+
+An end-to-end machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical real-world challenges: **severe class imbalance**, **non-linear clinical feature interactions**, and **UX-driven model serving**.
+
+---
+
+## 🚀 Key Technical Solutions
+
+### 1. Advanced Imbalance Handling & Strategic Pivot
+- **The Accuracy Paradox**: Initial baseline models achieved **83% accuracy** but failed clinically with **0% recall** for the prediabetes class due to severe data skewness.
+- **Target Binarization**: Strategically merged 'Prediabetes' and 'Diabetes' into a single 'At Risk' class to prioritize preventative screening efficacy and improve model stability.
+- **Cost-Sensitive Learning**: Implemented `class_weight='balanced'` in Random Forest to aggressively penalize misclassifications of minority-class patients.
+
+### 2. Clinical Threshold Optimization
+- **Recall-First Strategy**: Prioritized **Recall (79%)** over Precision (34%) to minimize False Negatives in a clinical screening context where missing a patient is high-risk.
+- **Youden’s J Statistic**: Derived a mathematically optimal threshold of **0.419** from cross-validated ROC curves, replacing the default 0.5 to maximize sensitivity.
+
+### 3. Production-Ready Software Engineering
+- **OOP-Based Refactoring**: Encapsulated the prediction engine into a modular `DiabetesPredictor` class for improved maintainability and scalable deployment.
+- **Real-Time Feature Engineering**: Developed dynamic mapping functions to translate raw user inputs (e.g., Age, Height, Weight) into BRFSS-standard categorical data.
+
+---
+
+## 🛠️ Technical Stack
+
+- **Machine Learning**: Scikit-learn (Random Forest, Logistic Regression, Pipelines).
+- **Data Engineering**: Pandas, NumPy (Log-transformation, Stratified Splitting).
+- **Serving & UI**: Streamlit (Web Dashboard), Flask (REST API), Altair (Visualization).
+- **Tools**: Joblib (Model Serialization), Git, VS Code, Anaconda.
+
+
+
+
+
 
 - log1p for mathematical safety
 - class_weight='balanced'
