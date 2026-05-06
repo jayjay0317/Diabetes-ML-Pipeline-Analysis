@@ -28,8 +28,53 @@ An end-to-end machine learning pipeline for diabetes risk prediction using the B
 - **Serving & UI**: Streamlit (Web Dashboard), Flask (REST API), Altair (Visualization).
 - **Tools**: Joblib (Model Serialization), Git, VS Code, Anaconda.
 
+---
 
+## 📊 Model Performance
 
+The final tuned Random Forest model demonstrates strong generalization and clinical utility.
+
+| Metric | Score | Note |
+| :--- | :--- | :--- |
+| **ROC-AUC** | **0.811** | Consistent discriminative power across unseen data. |
+| **Recall** | **79.0%** | Effectively identifies the majority of at-risk individuals. |
+| **Precision** | **34.0%** | Acceptable trade-off for early-stage preventative screening. |
+
+---
+
+## 🧬 Project Structure
+
+- `notebooks/`: Contains EDA, data cleaning, and model optimization workflows.
+- `src/model_handler.py`: Core `DiabetesPredictor` class with feature importance logic.
+- `src/app.py`: Flask-based backend server providing the `/predict` REST API endpoint.
+- `src/streamlit_app.py`: Interactive web UI for real-time risk assessment and reviewer metrics.
+
+---
+
+## 🖥️ Implementation Highlights
+
+### **Explainable AI (XAI)**
+The dashboard provides **Global Feature Importance** visualizations using Altair, helping users understand that `GenHlth` and `HighBP` are the primary risk drivers in the model.
+
+### **Human-Centric UX**
+- **Automatic BMI Calculation**: Simplifies the process by calculating BMI from user-provided height and weight.
+- **Risk Score System**: Translates raw ML probabilities into a **100-point Risk Score** for more intuitive communication of health risks.
+
+---
+
+## 🧪 How to Run
+
+1. **Clone the Repository**:
+   ```bash
+   git clone [https://github.com/jayjay0317/Diabetes-ML-Pipeline-Analysis.git](https://github.com/jayjay0317/Diabetes-ML-Pipeline-Analysis.git)
+
+2. **Launch the Streamlit App**:
+    ```bash
+    streamlit run src/streamlit_app.py
+
+3. **Test the Flask API**:
+    ```bash
+    python src/app.py
 
 
 
