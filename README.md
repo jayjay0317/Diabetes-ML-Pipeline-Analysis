@@ -6,6 +6,12 @@ An end-to-end machine learning pipeline for diabetes risk prediction using the B
 
 ---
 
+## 🌐 Deployment
+The interactive web dashboard is deployed and accessible via Streamlit Cloud:
+- **URL**: [https://diabetes-ml-pipeline-analysis.streamlit.app/](https://diabetes-ml-pipeline-analysis.streamlit.app/) (예시 주소입니다)
+
+---
+
 ## 🚀 Key Technical Solutions
 
 ### 1. Advanced Imbalance Handling & Strategic Pivot
