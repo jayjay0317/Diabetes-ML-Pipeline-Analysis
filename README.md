@@ -1,5 +1,7 @@
 # 🏥 Diabetes Health Indicators Analysis & Deployment
 
+> **Live Demo:** [🚀 View my Streamlit App](https://jaewoo-diabetes-prediction.streamlit.app/)
+
 An end-to-end machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical real-world challenges: **severe class imbalance**, **non-linear clinical feature interactions**, and **UX-driven model serving**.
 
 ---
