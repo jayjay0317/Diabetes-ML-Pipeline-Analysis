@@ -114,6 +114,18 @@ curl -X POST http://127.0.0.1:5000/predict \
 
 3. Expected Response:
 
+A successful request returns a JSON object with the prediction result:
+
+```json
+{
+  "prediction": 0,
+  "status": "success"
+}
+```
+Where:
+- `0` = Normal
+- `1` = At Risk
+
 
 - log1p for mathematical safety
 - class_weight='balanced'
