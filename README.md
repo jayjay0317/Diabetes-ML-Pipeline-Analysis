@@ -8,13 +8,9 @@ An end-to-end machine learning pipeline for diabetes risk prediction using the B
 The interactive web dashboard is deployed and accessible via Streamlit Cloud:
 > **Live Demo:** 🚀 [View my Streamlit App](https://jaewoo-diabetes-prediction.streamlit.app/)
 
-## 🌐 Live Demo
-The interactive web dashboard is deployed and accessible via Streamlit Cloud:
-- **Link**: [🚀 View Live Dashboard](https://jaewoo-diabetes-prediction.streamlit.app/)
-
 ---
 
-## 🚀 Key Technical Solutions
+## 🎯 Key Technical Solutions
 
 ### 1. Advanced Imbalance Handling & Strategic Pivot
 - **The Accuracy Paradox**: Initial baseline models achieved **83% accuracy** but failed clinically with **0% recall** for the prediabetes class due to severe data skewness.
@@ -97,6 +93,26 @@ The dashboard provides **Global Feature Importance** visualizations using Altair
     # Start the Flask backend server for REST API testing
     python src/app.py
     ```
+
+### 🧪 How to Test API
+
+Once the Flask server is running (`python src/app.py`), you can test the endpoint using the following commands:
+
+1. **Windows (PowerShell)**:
+```powershell
+# Send sample request to local API
+$body = @{ features = @(0,0,0,30,0,0,0,1,1,1,0,1,0,3,0,0,0,1,8,5,8) } | ConvertTo-Json
+Invoke-RestMethod -Uri "http://127.0.0.1:5000/predict" -Method Post -Body $body -ContentType "application/json"
+```
+
+2. **Mac / Linux (Terminal)**:
+```bash
+curl -X POST http://127.0.0.1:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"features":[0,0,0,30,0,0,0,1,1,1,0,1,0,3,0,0,0,1,8,5,8]}'
+```
+
+3. Expected Response:
 
 
 - log1p for mathematical safety
