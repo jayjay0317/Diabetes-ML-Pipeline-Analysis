@@ -36,6 +36,20 @@ The interactive web dashboard is deployed and accessible via Streamlit Cloud:
 
 ---
 
+## ⚙️ Machine Learning Pipeline
+
+### 1. Advanced Preprocessing with Scikit-learn Pipelines
+
+I constructed a robust preprocessing pipeline to ensure data integrity and prevent data leakage:
+- **Mathematical Safety with `log1p`**: Applied Log Transformation to highly skewed numerical features like **BMI** to normalize distribution and stabilize model training.
+- **Standardization**: Integrated `StandardScaler` within the pipeline to ensure ordinal and continuous features are on a comparable scale.
+- **Automated Column Transformation**: Utilized `ColumnTransformer` to apply specific transformations (Log, Scaling, or Passthrough) based on feature types, ensuring a seamless flow from raw data to inference.
+
+### 2. Optimized Target Engineering
+- **Target Binarization**: To improve clinical utility, I merged 'Prediabetes' and 'Diabetes' into a single 'At Risk' category, transforming a complex multi-class problem into a high-performing binary classification task.
+
+---
+
 ## 📊 Model Performance
 
 The final tuned Random Forest model demonstrates strong generalization and clinical utility.
@@ -45,6 +59,8 @@ The final tuned Random Forest model demonstrates strong generalization and clini
 | **ROC-AUC** | **0.811** | Consistent discriminative power across unseen data. |
 | **Recall** | **79.0%** | Effectively identifies the majority of at-risk individuals. |
 | **Precision** | **34.0%** | Acceptable trade-off for early-stage preventative screening. |
+| **F1-Score** | **0.470** | Balanced performance considering class imbalance. |
+| **Accuracy** | **70.0%** | Overall correct predictions for the binarized classes. |
 
 ---
 
@@ -94,7 +110,7 @@ The dashboard provides **Global Feature Importance** visualizations using Altair
     python src/app.py
     ```
 
-### 🧪 How to Test API
+### ⚗️ How to Test API
 
 Once the Flask server is running (`python src/app.py`), you can test the endpoint using the following commands:
 
