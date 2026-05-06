@@ -8,6 +8,10 @@ An end-to-end machine learning pipeline for diabetes risk prediction using the B
 The interactive web dashboard is deployed and accessible via Streamlit Cloud:
 > **Live Demo:** 🚀 [View my Streamlit App](https://jaewoo-diabetes-prediction.streamlit.app/)
 
+## 🌐 Live Demo
+The interactive web dashboard is deployed and accessible via Streamlit Cloud:
+- **Link**: [🚀 View Live Dashboard](https://jaewoo-diabetes-prediction.streamlit.app/)
+
 ---
 
 ## 🚀 Key Technical Solutions
