@@ -1,5 +1,5 @@
-# Diabetes-ML-Pipeline-Analysis
-End-to-end machine learning pipeline for diabetes prediction using BRFSS health indicators. Focused on class imbalance handling and clinical feature engineering.
+# 🏥 Diabetes Health Indicators Analysis & Deployment
+An end-to-end machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical real-world challenges: severe class imbalance, non-linear clinical feature interactions, and UX-driven model serving.
 
 - log1p for mathematical safety
 - class_weight='balanced'
