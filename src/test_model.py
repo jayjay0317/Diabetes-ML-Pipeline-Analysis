@@ -1,8 +1,39 @@
 from model_handler import DiabetesPredictor
 
-# Define the model path
-# We use '../' to go up one level to the root, then into the notebooks folder
+# Define the relative path to the trained model
 MODEL_PATH = 'notebooks/diabetes_rf_model.pkl'
+
+def run_model_test():
+    """
+    Unit test for the DiabetesPredictor class to ensure all methods
+    (predict, predict_proba, get_feature_importance) function correctly.
+    """
+    print('--- Starting Unit Test for model_handler.py ---')
+
+    # 1. Initialize and load the predictor
+    predictor = DiabetesPredictor()
+    predictor.load_model(MODEL_PATH)
+
+    # 2. Create a realistic dummy patient data dictionary (21 features)
+    sample_data = {
+        'BMI': 35.5, 'GenHlth': 4.0, 'MentHlth': 15.0, 'PhysHlth': 20.0,
+        'Age': 10.0, 'Education': 3.0, 'Income': 2.0, 'HighBP': 1.0,
+        'HighChol': 1.0, 'CholCheck': 1.0, 'Smoker': 1.0, 'Stroke': 0.0,
+        'HeartDiseaseorAttack': 1.0, 'PhysActivity': 0.0, 'Fruits': 0.0,
+        'Veggies': 1.0, 'HvyAlcoholConsump': 0.0, 'AnyHealthcare': 1.0,
+        'NoDocbcCost': 1.0, 'DiffWalk': 1.0, 'Sex': 1.0
+    }
+
+    # 3. Test exact class prediction
+    print('\n[Test 1] Testing predict()...')
+    pred_result = predictor.predict(sample_data)
+    print(f'-> Predicted Class: {pred_result}')
+
+
+
+
+
+
 
 def run_test():
     # Initialize the predictor

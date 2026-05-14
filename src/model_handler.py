@@ -19,19 +19,18 @@ class DiabetesPredictor:
         Load the pre-trained model and extract feature names.
         """
         self.model = joblib.load(model_path)
-        try:
-            self.feature_names = [
-            'BMI',                               # Skewed feature
-            'GenHlth', 'MentHlth', 'PhysHlth',   # Numerical/Ordinal features
-            'Age', 'Education', 'Income',
-            'HighBP', 'HighChol', 'CholCheck',   # Binary features
-            'Smoker', 'Stroke', 'HeartDiseaseorAttack', 
-            'PhysActivity', 'Fruits', 'Veggies', 
-            'HvyAlcoholConsump', 'AnyHealthcare', 
-            'NoDocbcCost', 'DiffWalk', 'Sex'
-            ]
-        except AttributeError:
-            self.feature_names = None
+        
+        self.feature_names = [
+        'BMI',                               # Skewed feature
+        'GenHlth', 'MentHlth', 'PhysHlth',   # Numerical/Ordinal features
+        'Age', 'Education', 'Income',
+        'HighBP', 'HighChol', 'CholCheck',   # Binary features
+        'Smoker', 'Stroke', 'HeartDiseaseorAttack', 
+        'PhysActivity', 'Fruits', 'Veggies', 
+        'HvyAlcoholConsump', 'AnyHealthcare', 
+        'NoDocbcCost', 'DiffWalk', 'Sex'
+        ]
+
         print(f'Successfully loaded model from: {model_path}')
     
     def predict(self, data):
