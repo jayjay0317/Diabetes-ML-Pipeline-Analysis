@@ -258,11 +258,6 @@ if submitted:
     st.markdown('---')
     st.subheader('📊 What factors influenced your risk?')
 
-    # Extract top 10 features and convert Series to DataFrame for Altair compatibility
-    importances = predictor.get_feature_importance().head(10)
-    importance_df = importances.reset_index()
-    importance_df.columns = ['Feature', 'Importance']
-
     # Render bar chart with explicit sorting to prevent alphabetical order
     chart = alt.Chart(importance_df).mark_bar().encode(
         x=alt.X('Feature', sort='-y', title='Health Factors'),
