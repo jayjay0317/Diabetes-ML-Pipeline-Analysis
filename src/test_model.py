@@ -29,6 +29,21 @@ def run_model_test():
     pred_result = predictor.predict(sample_data)
     print(f'-> Predicted Class: {pred_result}')
 
+    # 4. Test probability prediction
+    print('\n[Test 2] Testing predict_proba()...')
+    proba_result = predictor.predict_proba(sample_data)
+    print(f'-> Prediction Probabilities: {proba_result}')
+
+    # 5. Test feature importance extraction
+    print('\n[Test 3] Testing get_feature_importance()...')
+    importance_result = predictor.get_feature_importance()
+    print(f'-> Top 5 Important Features:\n{importance_result.head(5)}')
+
+    print('\n--- Unit Test Completed Successfully ---')
+
+if __name__ == '__main__':
+    run_model_test()
+
 
 
 
