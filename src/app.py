@@ -8,32 +8,22 @@ MODEL_PATH = "notebooks/diabetes_rf_model.pkl"
 predictor = DiabetesPredictor()
 predictor.load_model(MODEL_PATH)
 
-@app.route('/')
-def home():
-    """
-    Check if the server is running.
-    """
-    return "Diabetes Prediction Server is Running."
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'healthy', 'message': 'Diabetes Prediction API is running'})
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    """
-    Endpoint to receive data and return prediction.
-    """
     try:
-        # Get JSON data from the request
         data = request.get_json()
 
-        # Extract features (Expecting a list of 21 values)
-        features = data.get('features')
+        # Extract probability of the positive class (High Risk)
+        probabilities = predictor.predict_proba(data)
+        high_risk_prob = float(probabilities[1])
 
-        # Get prediction result from our OOP handler
-        result = predictor.predict(features)
-
-        # Return the result as JSON
         return jsonify({
             'status': 'success',
-            'prediction': int(result)
+            'high_risk_probability': high_risk_prob
         })
     
     except Exception as e:
@@ -42,6 +32,23 @@ def predict():
             'message': str(e)
         }), 400
 
+@app.route('/importance', methods=['GET'])
+def feature_importance():
+    try:
+        # Extract top 10 features for UI visualization
+        importances = predictor.get_feature_importance().head(10)
+        importance_dict = importances.to_dict()
+
+        return jsonify({
+            'status': 'success',
+            'feature_importance': importance_dict
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'status': 'error', 
+            'message': str(e)
+        }), 500
+
 if __name__ == '__main__':
-    # Run the Flask app
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', port=5000)
