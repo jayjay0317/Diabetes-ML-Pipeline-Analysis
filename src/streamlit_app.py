@@ -197,7 +197,7 @@ if submitted:
     # 3. Request predictions and feature importance from Backend API
     try:
         # Fetch prediction probability
-        pred_response = requests.post('http://localhost:5000/predict'. json=payload)
+        pred_response = requests.post('http://localhost:5000/predict', json=payload)
         pred_result = pred_response.json()
 
         if pred_result['status'] == 'success':
