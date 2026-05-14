@@ -2,17 +2,10 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import altair as alt
-from model_handler import DiabetesPredictor
+import requests
 
 # Page configuration
 st.set_page_config(page_title='Diabetes Risk Predictor', layout='centered')
-
-# Load model with caching to prevent redundant loading
-@st.cache_resource
-def get_predictor_v2():
-    predictor = DiabetesPredictor()
-    predictor.load_model('notebooks/diabetes_rf_model.pkl')
-    return predictor
 
 def map_age_to_category(age):
     """
@@ -44,8 +37,6 @@ def map_age_to_category(age):
         return 12.0
     else:
         return 13.0
-
-predictor = get_predictor_v2()
 
 # Header section
 st.title('🏥 Diabetes Risk Predictor')
@@ -164,6 +155,7 @@ with st.form('diabetes_form'):
 
 # Inference logic upon form submission
 if submitted:
+    # 1. Validate basic inputs
     # Calculate BMI
     if height_cm is None or weight_kg is None:
         st.warning('Please enter both your height and weight to proceed.')
@@ -176,35 +168,60 @@ if submitted:
     bmi = weight_kg / ((height_cm / 100) ** 2)
     age = map_age_to_category(age_input)
    
-    # Feature engineering: matching the 21 input features required by the model
-    # Placeholders (0) are used for the remaining 18 features for now
-    # Define exact column names used during training
-    column_names = [
-        'HighBP', 'HighChol', 'CholCheck', 'BMI', 'Smoker', 'Stroke',
-        'HeartDiseaseorAttack', 'PhysActivity', 'Fruits', 'Veggies',
-        'HvyAlcoholConsump', 'AnyHealthcare', 'NoDocbcCost', 'GenHlth',
-        'MentHlth', 'PhysHlth', 'DiffWalk', 'Sex', 'Age', 'Education', 'Income'
-    ]
+    # 2. Construct JSON payload for Flask API
+    # Unspecified features are initialized to 0.0 based on training baseline
+    payload = {
+        'HighBP': float(high_bp),
+        'HighChol': 1.0 if high_chol == 'Yes' else 0.0,
+        'CholCheck': 0.0, 
+        'BMI': float(bmi),
+        'Smoker': 1.0 if smoker == 'Yes' else 0.0,
+        'Stroke': 0.0,
+        'HeartDiseaseorAttack': 0.0,
+        'PhysActivity': 1.0 if phys_activity == 'Yes' else 0.0,
+        'Fruits': 0.0,
+        'Veggies': 0.0,
+        'HvyAlcoholConsump': 0.0,
+        'AnyHealthcare': 0.0,
+        'NoDocbcCost': 0.0,
+        'GenHlth': float(genhlth),
+        'MentHlth': float(ment_hlth),
+        'PhysHlth': 0.0,
+        'DiffWalk': 1.0 if diff_walk == 'Yes' else 0.0,
+        'Sex': 0.0,
+        'Age': float(age),
+        'Education': float(education),
+        'Income': float(income)
+    }
+    
+    # 3. Request predictions and feature importance from Backend API
+    try:
+        # Fetch prediction probability
+        pred_response = requests.post('http://localhost:5000/predict'. json=payload)
+        pred_result = pred_response.json()
 
-    # Creat a DataFrame to ensure the pipeline identifies features by name
-    input_df = pd.DataFrame([[0.0] * 21], columns=column_names)
+        if pred_result['status'] == 'success':
+            high_risk_prob = pred_result['high_risk_probability']
+        else:
+            st.error(f'Backend Error: {pred_result.get('message')}')
+            st.stop()
+        
+        # Fetch feature importance for visualization
+        imp_response = requests.get('http://localhost:5000/importance')
+        imp_result = imp_response.json()
 
-    input_df.at[0, 'HighBP'] = float(high_bp)
-    input_df.at[0, 'BMI'] = float(bmi) # Pipeline will apply log1p and scaling
-    input_df.at[0, 'Age'] = float(age) # Pipeline will apply scaling
-    input_df.at[0, 'GenHlth'] = float(genhlth)
-    input_df.at[0, 'HighChol'] = 1.0 if high_chol == 'Yes' else 0.0
-    input_df.at[0, 'PhysActivity'] = 1.0 if phys_activity == 'Yes' else 0.0
-    input_df.at[0, 'DiffWalk'] = 1.0 if diff_walk == 'Yes' else 0.0
-    input_df.at[0, 'Smoker'] = 1.0 if smoker == "Yes" else 0.0
-    input_df.at[0, 'MentHlth'] = float(ment_hlth)
-    input_df.at[0, 'Education'] = float(education)
-    input_df.at[0, 'Income'] = float(income)
+        if imp_result['status'] == 'success':
+            # Convert dictionary back to DataFrame for Altair chart
+            importance_dict = imp_result['feature_importance']
+            importance_df = pd.DataFrame(list(importance_dict.items()), columns=['Feature', 'Importance'])
+        else:
+            importance_df = pd.DataFrame() # Fallback for UI stability
 
-    # Extract probability of the positive class (High Risk)
-    probabilities = predictor.predict_proba(input_df)
-    high_risk_prob = probabilities[1]
+    except requests.exceptions.ConnectionError:
+        st.error('Backend server is not reachable. Please ensure Flask API is running.')
+        st.stop()
 
+    # 4. Render Screening Results
     # Apply optimal threshold derived from CV Youden's J statistic
     optimal_threshold = 0.419
 
@@ -237,7 +254,7 @@ if submitted:
         st.progress(high_risk_prob) # Visual indicator
         st.write('Please maintain your current healthy lifestyle.')
 
-    # --- Feature Importance Visualization ---
+    # 5. Render Feature Importance Visualization
     st.markdown('---')
     st.subheader('📊 What factors influenced your risk?')
 
