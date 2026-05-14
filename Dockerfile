@@ -14,5 +14,5 @@ COPY . .
 # Step 5: Open Streamlit's default port
 EXPOSE 8501
 
-# 7. Run the application
-CMD ["strealit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+# 6. Run Streamlit application
+CMD ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
