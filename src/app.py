@@ -37,11 +37,16 @@ def feature_importance():
     try:
         # Extract top 10 features for UI visualization
         importances = predictor.get_feature_importance().head(10)
-        importance_dict = importances.to_dict()
+
+        # Convert to List of Dictionaries to prevent alphabetical sorting
+        importance_list = [
+            {'Feature': feature, 'Importance': float(importance)}
+            for feature, importance in importances.items()
+        ]
 
         return jsonify({
             'status': 'success',
-            'feature_importance': importance_dict
+            'feature_importance': importance_list
         })
     
     except Exception as e:

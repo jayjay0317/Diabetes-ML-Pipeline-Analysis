@@ -211,11 +211,10 @@ if submitted:
         imp_result = imp_response.json()
 
         if imp_result['status'] == 'success':
-            # Convert dictionary back to DataFrame for Altair chart
-            importance_dict = imp_result['feature_importance']
-            importance_df = pd.DataFrame(list(importance_dict.items()), columns=['Feature', 'Importance'])
+            importance_list = imp_result['feature_importance']
+            importance_df = pd.DataFrame(importance_list)
         else:
-            importance_df = pd.DataFrame() # Fallback for UI stability
+            importance_df = pd.DataFrame(columns=['Feature', 'Importance']) # Fallback for UI stability
 
     except requests.exceptions.ConnectionError:
         st.error('Backend server is not reachable. Please ensure Flask API is running.')

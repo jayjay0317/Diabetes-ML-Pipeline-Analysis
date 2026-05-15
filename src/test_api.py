@@ -27,7 +27,7 @@ def run_api_test():
         pred_response = requests.post(f'{BASE_URL}/predict', json=payload)
         print(f'-> Status Code: {pred_response.status_code}')
         if pred_response.status_code == 200:
-            print(f'-> High Risk Probability: {pred_response.json().get('high_risk_probability':.4f)}')
+            print(f"-> High Risk Probability: {pred_response.json().get('high_risk_probability'):.4f}")
     except requests.exceptions.ConnectionError:
         print('-> Error: Could not connect. Is the Flask server running?')
 
