@@ -37,9 +37,9 @@ def run_api_test():
         imp_response = requests.get(f'{BASE_URL}/importance')
         print(f'-> Status Code: {imp_response.status_code}')
         if imp_response.status_code == 200:
-            features = imp_response.json().get('feature_importance', {})
-            # Extract just the top 3 keys for a brief check
-            top_features = list(features.keys())[:3]
+            features_list = imp_response.json().get('feature_importance', [])
+            top_features = [item['Feature'] for item in feature_list[:3]]
+            
             print(f'-> Successfully retrieved importance. Top 3: {top_features}')
     except requests.exceptions.ConnectionError:
         print('-> Error: Could not connect. Is the Flask server running?')
