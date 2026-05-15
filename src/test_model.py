@@ -43,28 +43,3 @@ def run_model_test():
 
 if __name__ == '__main__':
     run_model_test()
-
-
-
-
-
-
-
-def run_test():
-    # Initialize the predictor
-    predictor = DiabetesPredictor()
-
-    # Load the model
-    predictor.load_model(MODEL_PATH)
-
-    # Create dummy patient data with 21 features (matching X_train)
-    sample_data = [0.0] * 21
-
-    # Perform prediction
-    print('Testing prediction with sample data...')
-    result = predictor.predict(sample_data)
-
-    print(f'Prediction Result: {result}')
-
-if __name__ == '__main__':
-    run_test()
