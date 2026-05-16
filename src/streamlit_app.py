@@ -203,7 +203,7 @@ if submitted:
         if pred_result['status'] == 'success':
             high_risk_prob = pred_result['high_risk_probability']
         else:
-            st.error(f'Backend Error: {pred_result.get('message')}')
+            st.error(f"Backend Error: {pred_result.get('message')}")
             st.stop()
         
         # Fetch feature importance for visualization
