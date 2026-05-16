@@ -3,6 +3,12 @@ import pandas as pd
 import numpy as np
 import altair as alt
 import requests
+import os
+
+# Define API URL: Use Docker environment variable if available, 
+# fallback to localhost for local testing
+API_URL = os.getenv('API_URL', 'http://localhost:5000')
+
 
 # Page configuration
 st.set_page_config(page_title='Diabetes Risk Predictor', layout='centered')
@@ -196,8 +202,8 @@ if submitted:
     
     # 3. Request predictions and feature importance from Backend API
     try:
-        # Fetch prediction probability
-        pred_response = requests.post('http://localhost:5000/predict', json=payload)
+        # Fetch prediction probability using the dynamic API URL
+        pred_response = requests.post(f'{API_URL}/predict', json=payload)
         pred_result = pred_response.json()
 
         if pred_result['status'] == 'success':
@@ -206,8 +212,8 @@ if submitted:
             st.error(f"Backend Error: {pred_result.get('message')}")
             st.stop()
         
-        # Fetch feature importance for visualization
-        imp_response = requests.get('http://localhost:5000/importance')
+        # Fetch feature importance for visualization using the dynamic API URL
+        imp_response = requests.get(f'{API_URL}/importance')
         imp_result = imp_response.json()
 
         if imp_result['status'] == 'success':
