@@ -1,12 +1,22 @@
 # 🏥 Diabetes Health Indicators Analysis & Deployment
 
-An end-to-end data analysis and machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical production and analytical challenges including severe class imbalance, non-linear clinical feature interactions, and environment disparity. These bottlenecks are resolved through rigorous statistical evaluation and a robust multi-container serving infrastructure deployed on AWS using Docker.
+An end-to-end data analysis and machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical production and analytical challenges including severe class imbalance, non-linear clinical feature interactions, and environment disparity. These bottlenecks are resolved through robust statistical evaluation and a robust multi-container serving infrastructure deployed on AWS using Docker.
 
 ---
 
 ## 🌐 Deployment
 Rather than relying on automated cloud tools, this system is fully deployed on a self-managed AWS EC2 instance running a clean Linux Ubuntu environment.  
 🚀 **[Launch Live Demo via AWS](http://3.131.160.92:8501)**
+
+---
+
+## 🏗️ System Architecture
+
+The production infrastructure separates the frontend and backend into isolated environments using a modular multi-container architecture.
+
+* **Frontend Container** runs an interactive Streamlit web dashboard that captures user inputs and communicates with the inference server.
+* **Backend Container** operates a Flask API engine to provide fast and lightweight model predictions.
+* **Orchestration** utilizes Docker Compose to manage and bridge both containers within a single secure virtual network.
 
 ---
 
