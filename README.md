@@ -1,14 +1,13 @@
 # 🏥 Diabetes Health Indicators Analysis & Deployment
 
-An end-to-end machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical real-world challenges including **severe class imbalance**, **non-linear clinical feature interactions**, and **Docker-based multi-container model serving**.
-
 An end-to-end data analysis and machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical production and analytical challenges including severe class imbalance, non-linear clinical feature interactions, and environment disparity. These bottlenecks are resolved through rigorous statistical evaluation and a robust multi-container serving infrastructure deployed on AWS using Docker.
 
 ---
 
 ## 🌐 Deployment
-The interactive web dashboard is deployed and accessible via Streamlit Cloud:
+Rather than relying on automated cloud tools, this system is fully deployed on a self-managed AWS EC2 instance running a clean Linux Ubuntu environment.
 > **Live Demo:** 🚀 [View my Streamlit App](https://jaewoo-diabetes-prediction.streamlit.app/)
+🚀 **[Live Demo](http://3.131.160.92:8501)**
 
 ---
 
