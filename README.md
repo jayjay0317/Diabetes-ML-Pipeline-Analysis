@@ -1,6 +1,8 @@
 # 🏥 Diabetes Health Indicators Analysis & Deployment
 
-An end-to-end machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical real-world challenges: **severe class imbalance**, **non-linear clinical feature interactions**, and **UX-driven model serving**.
+An end-to-end machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical real-world challenges including **severe class imbalance**, **non-linear clinical feature interactions**, and **Docker-based multi-container model serving**.
+
+An end-to-end data analysis and machine learning pipeline for diabetes risk prediction using the BRFSS 2015 dataset. This project addresses critical production and analytical challenges including severe class imbalance, non-linear clinical feature interactions, and environment disparity. These bottlenecks are resolved through rigorous statistical evaluation and a robust multi-container serving infrastructure deployed on AWS using Docker.
 
 ---
 
