@@ -5,7 +5,7 @@ An end-to-end data analysis and machine learning pipeline for diabetes risk pred
 ---
 
 ## 🌐 Deployment
-Rather than relying on automated cloud tools, this system is fully deployed on a self-managed AWS EC2 instance running a clean Linux Ubuntu environment.
+Rather than relying on automated cloud tools, this system is fully deployed on a self-managed AWS EC2 instance running a clean Linux Ubuntu environment.  
 🚀 **[Launch Live Demo via AWS](http://3.131.160.92:8501)**
 
 ---
