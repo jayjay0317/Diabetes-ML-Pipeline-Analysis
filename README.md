@@ -109,18 +109,18 @@ This project uses Docker Compose to manage the multi-container environment (reco
    cd Diabetes-ML-Pipeline-Analysis
    ```
 
-2. **Launch the services**:
+2. **Launch the services**:  
 Execute the following command to build the containers and start the Flask API and Streamlit dashboard services simultaneously.
     ```bash
     docker compose up --build
     ```
 
-3. **Access the application**:
+3. **Access the application**:  
 Once the containers are running, you can verify the services via your web browser.
 * Streamlit Dashboard: http://localhost:8501
 * Flask API: http://localhost:5000/health
 
-4. **Stop the services**:
+4. **Stop the services**:  
 To shut down the containers, press Ctrl+C in your terminal or run:
     ```bash
     docker compose down
