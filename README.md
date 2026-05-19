@@ -74,6 +74,17 @@ The final tuned Random Forest model demonstrates strong generalization and clini
 
 ---
 
+## 🖥️ Implementation Highlights
+
+### **Explainable AI (XAI)**
+The dashboard provides Global Feature Importance visualizations using Altair to help users understand that general health perception (GenHlth) and high blood pressure (HighBP) act as the primary risk drivers inside the random forest model.
+
+### **Human-Centric UX**
+- **Automatic BMI Calculation**: Simplifies the user experience by calculating BMI from user-provided height and weight.
+- **Risk Score System**: Translates raw machine learning probabilities into an intuitive 100 point risk score system to communicate health risks clearly to non technical end users.
+
+---
+
 ## 🧬 Project Structure
 
 * `docker-compose.yml` defines the multi-container orchestration for frontend and backend services.
@@ -83,17 +94,6 @@ The final tuned Random Forest model demonstrates strong generalization and clini
 * `src/model_handler.py` holds the core `DiabetesPredictor` class with feature importance logic.
 * `src/app.py` runs the Flask API backend server providing the prediction endpoint.
 * `src/streamlit_app.py` runs the interactive Streamlit user interface for real-time risk assessment.
-
----
-
-## 🖥️ Implementation Highlights
-
-### **Explainable AI (XAI)**
-The dashboard provides Global Feature Importance visualizations using Altair to help users understand that general health perception (GenHlth) and high blood pressure (HighBP) act as the primary risk drivers inside the random forest model.
-
-### **Human-Centric UX**
-- **Automatic BMI Calculation**: Simplifies the user experience by calculating BMI from user-provided height and weight.
-- **Risk Score System**: Translates raw machine learning probabilities into an intuitive 100 point risk score system to communicate health risks clearly to non technical end users.
 
 ---
 
