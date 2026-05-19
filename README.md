@@ -69,7 +69,7 @@ The final tuned Random Forest model demonstrates strong generalization and clini
 | **ROC-AUC** | **0.811** | Consistent discriminative power across unseen data |
 | **Recall** | **79.0%** | Effectively identifies the majority of at-risk individuals to minimize false negatives |
 | **Precision** | **34.0%** | Acceptable trade-off for early-stage preventative screening thresholds |
-| **F1-Score** | **0.470** | Balanced performance considering the severe class imbalance constraints |
+| **F1-Score** | **0.470** | Reflects the trade-off of maximizing Recall under severe class imbalance |
 | **Accuracy** | **70.0%** | Overall correct predictions for the binarized target classes |
 
 ---
