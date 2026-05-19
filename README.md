@@ -14,9 +14,9 @@ Rather than relying on automated cloud tools, this system is fully deployed on a
 
 The production infrastructure separates the frontend and backend into isolated environments using a modular multi-container architecture.
 
-* **Frontend Container** runs an interactive Streamlit web dashboard that captures user inputs and communicates with the inference server.
-* **Backend Container** operates a Flask API engine to provide fast and lightweight model predictions.
-* **Orchestration** utilizes Docker Compose to manage and bridge both containers within a single secure virtual network.
+* **Frontend Container**: runs an interactive Streamlit web dashboard that captures user inputs and communicates with the inference server.
+* **Backend Container**: operates a Flask API engine to provide fast and lightweight model predictions.
+* **Orchestration**: utilizes Docker Compose to manage and bridge both containers within a single secure virtual network.
 
 ---
 
@@ -39,10 +39,12 @@ The production infrastructure separates the frontend and backend into isolated e
 
 ## 🛠️ Technical Stack
 
-- **Machine Learning**: Scikit-learn (Random Forest, Logistic Regression, Pipelines).
-- **Data Engineering**: Pandas, NumPy (Log-transformation, Stratified Splitting).
-- **Serving & UI**: Streamlit (Web Dashboard), Flask (REST API), Altair (Visualization).
-- **Tools**: Joblib (Model Serialization), Git, VS Code, Anaconda.
+- **Infrastructure & Deployment**: AWS EC2, Docker, Docker Compose, Ubuntu
+- **Machine Learning & Data Processing**: Scikit-learn, Pandas, NumPy
+- **API & Frontend**: Flask, Streamlit
+- **Visualization**: Altair
+- **Model Persistence**: Joblib
+- **Version Control**: Git
 
 ---
 
