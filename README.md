@@ -62,15 +62,18 @@ I constructed a robust preprocessing pipeline to prevent data leakage during tra
 
 ## 📊 Model Performance
 
-The final tuned Random Forest model demonstrates strong generalization and clinical utility.
+The final tuned Random Forest model demonstrates strong generalization and clinical utility, aligning with preventative healthcare screening standards.
 
 | Metric | Score | Note |
 | :--- | :--- | :--- |
-| **ROC-AUC** | **0.811** | Consistent discriminative power across unseen data. |
-| **Recall** | **79.0%** | Effectively identifies the majority of at-risk individuals. |
-| **Precision** | **34.0%** | Acceptable trade-off for early-stage preventative screening. |
-| **F1-Score** | **0.470** | Balanced performance considering class imbalance. |
-| **Accuracy** | **70.0%** | Overall correct predictions for the binarized classes. |
+
+| Metric | Score | Note |
+| :--- | :--- | :--- |
+| **ROC-AUC** | **0.811** | Consistent discriminative power across unseen data |
+| **Recall** | **79.0%** | Effectively identifies the majority of at-risk individuals to minimize false negatives |
+| **Precision** | **34.0%** | Acceptable trade-off for early-stage preventative screening thresholds |
+| **F1-Score** | **0.470** | Balanced performance considering the severe class imbalance constraints |
+| **Accuracy** | **70.0%** | Overall correct predictions for the binarized target classes |
 
 ---
 
