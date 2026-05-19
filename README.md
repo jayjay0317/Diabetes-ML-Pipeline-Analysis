@@ -24,16 +24,16 @@ The production infrastructure separates the frontend and backend into isolated e
 
 ### 1. Advanced Imbalance Handling & Strategic Pivot
 - **The Accuracy Paradox**: Initial baseline models achieved **83% accuracy** but failed clinically with **0% recall** for the prediabetes class due to severe data skewness.
-- **Target Binarization**: Strategically merged 'Prediabetes' and 'Diabetes' into a single 'At Risk' class to prioritize preventative screening efficacy and improve model stability.
-- **Cost-Sensitive Learning**: Implemented `class_weight='balanced'` in Random Forest to aggressively penalize misclassifications of minority-class patients.
+- **Target Binarization**: Strategically merged 'Prediabetes' and 'Diabetes' into a single 'At Risk' class to prioritize preventative screening efficacy and improve overall model stability.
+- **Cost-Sensitive Learning**: Implemented balanced class weights (`class_weight='balanced'`) in Random Forest to aggressively penalize misclassifications of minority-class patients.
 
 ### 2. Clinical Threshold Optimization
-- **Recall-First Strategy**: Prioritized **Recall (79%)** over Precision (34%) to minimize False Negatives in a clinical screening context where missing a patient is high-risk.
+- **Recall-First Strategy**: Prioritized **Recall (79%)** over Precision (34%) to minimize False Negatives in a clinical screening context where missing a patient carries high risk.
 - **Youden’s J Statistic**: Derived a mathematically optimal threshold of **0.419** from cross-validated ROC curves, replacing the default 0.5 to maximize sensitivity.
 
 ### 3. Production-Ready Software Engineering
 - **OOP-Based Refactoring**: Encapsulated the prediction engine into a modular `DiabetesPredictor` class for improved maintainability and scalable deployment.
-- **Real-Time Feature Engineering**: Developed dynamic mapping functions to translate raw user inputs (e.g., Age, Height, Weight) into BRFSS-standard categorical data.
+- **Real-Time Feature Engineering**: Developed dynamic mapping functions to translate raw user inputs (e.g., Age, Height, Weight) into BRFSS-standard categorical data on the fly.
 
 ---
 
