@@ -122,6 +122,7 @@ Once the containers are running, you can verify the services via your web browse
 
 4. **Stop the services**:  
 To shut down the containers, press Ctrl+C in your terminal or run:
+
     ```bash
     docker compose down
     ```
