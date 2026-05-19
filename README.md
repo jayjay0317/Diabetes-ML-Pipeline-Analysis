@@ -50,15 +50,13 @@ The production infrastructure separates the frontend and backend into isolated e
 
 ## ⚙️ Machine Learning Pipeline
 
-### 1. Advanced Preprocessing with Scikit-learn Pipelines
+### Advanced Preprocessing with Scikit-learn Pipelines
 
-I constructed a robust preprocessing pipeline to ensure data integrity and prevent data leakage:
-- **Mathematical Safety with `log1p`**: Applied Log Transformation to highly skewed numerical features like **BMI** to normalize distribution and stabilize model training.
+I constructed a robust preprocessing pipeline to prevent data leakage during training and ensure strict consistency in data transformations during live inference environments.
+- **Prevention of Data Leakage**: Encapsulated all preprocessing steps inside a Scikit-learn Pipeline object to ensure that scaling parameters are computed strictly on training folds, preventing information from validation folds from leaking into the training process.
+- **Mathematical Safety with `log1p`**: Applied Log Transformation to highly skewed numerical features like BMI to normalize distribution and stabilize model training.
 - **Standardization**: Integrated `StandardScaler` within the pipeline to ensure ordinal and continuous features are on a comparable scale.
-- **Automated Column Transformation**: Utilized `ColumnTransformer` to apply specific transformations (Log, Scaling, or Passthrough) based on feature types, ensuring a seamless flow from raw data to inference.
-
-### 2. Optimized Target Engineering
-- **Target Binarization**: To improve clinical utility, I merged 'Prediabetes' and 'Diabetes' into a single 'At Risk' category, transforming a complex multi-class problem into a high-performing binary classification task.
+- **Automated Column Transformation**: Utilized `ColumnTransformer` to apply specific transformations based on feature types, ensuring a seamless flow from raw data to production inference.
 
 ---
 
