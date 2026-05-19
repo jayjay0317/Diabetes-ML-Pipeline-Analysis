@@ -126,7 +126,6 @@ To stop the services and clean up the containers, run:
     ```bash
     docker compose down
     ```
-(If you are running in the foreground, you can also press Ctrl+C to stop the services.)
 
 ### ⚗️ How to Test the Inference Endpoint
 
