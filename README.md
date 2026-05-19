@@ -116,43 +116,14 @@ Execute the following command to build the containers and start the Flask API an
     ```
 
 3. **Access the application**:
-Once the containers are running, you can access the services via your web browser:
+Once the containers are running, you can verify the services via your web browser.
 * Streamlit Dashboard: http://localhost:8501
-* Flask API: http://localhost:5000
+* Flask API: http://localhost:5000/health
 
 4. **Stop the services**:
 To shut down the containers, press Ctrl+C in your terminal or run:
     ```bash
     docker compose down
-    ```
-
-
-
-
-This project uses Docker Compose to manage the multi-container environment. Follow these steps to set up and run the service locally.
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/jayjay0317/Diabetes-ML-Pipeline-Analysis.git
-   # Navigate into the project directory
-   cd Diabetes-ML-Pipeline-Analysis
-   ```
-
-2. **Install Dependencies**:
-    ```bash
-    # Install required libraries for the project
-    pip install -r requirements.txt
-    ```
-
-3. **Launch the Streamlit App**:
-    ```bash
-    # Start the interactive web interface
-    streamlit run src/streamlit_app.py
-    ```
-4. **Test the Flask API**:
-    ```bash
-    # Start the Flask backend server for REST API testing
-    python src/app.py
     ```
 
 ### ⚗️ How to Test API
