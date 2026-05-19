@@ -66,9 +66,6 @@ The final tuned Random Forest model demonstrates strong generalization and clini
 
 | Metric | Score | Note |
 | :--- | :--- | :--- |
-
-| Metric | Score | Note |
-| :--- | :--- | :--- |
 | **ROC-AUC** | **0.811** | Consistent discriminative power across unseen data |
 | **Recall** | **79.0%** | Effectively identifies the majority of at-risk individuals to minimize false negatives |
 | **Precision** | **34.0%** | Acceptable trade-off for early-stage preventative screening thresholds |
