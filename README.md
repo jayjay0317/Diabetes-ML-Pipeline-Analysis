@@ -100,7 +100,7 @@ The dashboard provides Global Feature Importance visualizations using Altair to 
 
 ## 🧪 How to Run
 
-This project uses Docker Compose to manage the multi-container environment. Follow these steps to set up and run the service locally.
+This project uses Docker Compose to manage the multi-container environment (recommended for consistent deployment). Follow these steps to set up and run the service locally.
 
 1. **Clone the Repository**:
    ```bash
