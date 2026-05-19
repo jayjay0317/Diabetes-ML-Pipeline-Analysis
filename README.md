@@ -121,7 +121,7 @@ Once the containers are running, you can verify the services via your web browse
 * Flask API: http://localhost:5000/health
 
 4. **Stop the services**:  
-To shut down the containers, press Ctrl+C in your terminal or run:
+To shut down the services and remove the containers, run:
 
     ```bash
     docker compose down
