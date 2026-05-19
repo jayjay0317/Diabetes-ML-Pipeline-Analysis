@@ -121,26 +121,29 @@ Once the containers are running, you can verify the services via your web browse
 * Flask API: http://localhost:5000/health
 
 4. **Stop the services**:  
-To shut down the services and remove the containers, run:
+To stop the services and clean up the containers, run:
 
     ```bash
     docker compose down
     ```
 
-### ⚗️ How to Test API
+### ⚗️ How to Test the Inference Endpoint
 
-Once the Flask server is running (`python src/app.py`), you can test the endpoint using the following commands:
+You can verify the model's prediction functionality by sending a POST request to the inference endpoint.
 
-1. **Windows (PowerShell)**:
+**Using Powershell (Windows)**:
 ```powershell
-# Send sample request to local API
+# You can test the API by running this block directly in your terminal
 $body = @{ features = @(0,0,0,30,0,0,0,1,1,1,0,1,0,3,0,0,0,1,8,5,8) } | ConvertTo-Json
-Invoke-RestMethod -Uri "http://127.0.0.1:5000/predict" -Method Post -Body $body -ContentType "application/json"
+Invoke-RestMethod -Uri "http://localhost:5000/predict" `
+-Method Post `
+-Body $body `
+-ContentType "application/json"
 ```
 
-2. **Mac / Linux (Terminal)**:
+**Using cURL (macOS/Linux)**:
 ```bash
-curl -X POST http://127.0.0.1:5000/predict \
+curl -X POST http://localhost:5000/predict \
   -H "Content-Type: application/json" \
   -d '{"features":[0,0,0,30,0,0,0,1,1,1,0,1,0,3,0,0,0,1,8,5,8]}'
 ```
