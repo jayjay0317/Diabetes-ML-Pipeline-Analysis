@@ -90,6 +90,7 @@ The dashboard provides Global Feature Importance visualizations using Altair to 
 * `docker-compose.yml` defines the multi-container orchestration for frontend and backend services.
 * `Dockerfile.flask` configures the environment for the Flask API inference server.
 * `Dockerfile.streamlit` configures the environment for the interactive web dashboard application.
+* `requirements.txt` lists the essential Python library dependencies.
 * `notebooks/` contains exploratory data analysis, data cleaning, model optimization workflows, and the serialized `diabetes_rf_model.pkl` file.
 * `src/model_handler.py` holds the core `DiabetesPredictor` class with feature importance logic.
 * `src/app.py` runs the Flask API backend server providing the prediction endpoint.
@@ -98,6 +99,37 @@ The dashboard provides Global Feature Importance visualizations using Altair to 
 ---
 
 ## 🧪 How to Run
+
+This project uses Docker Compose to manage the multi-container environment. Follow these steps to set up and run the service locally.
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/jayjay0317/Diabetes-ML-Pipeline-Analysis.git
+   # Navigate into the project directory
+   cd Diabetes-ML-Pipeline-Analysis
+   ```
+
+2. **Launch the services**:
+Execute the following command to build the containers and start the Flask API and Streamlit dashboard services simultaneously.
+    ```bash
+    docker compose up --build
+    ```
+
+3. **Access the application**:
+Once the containers are running, you can access the services via your web browser:
+* Streamlit Dashboard: http://localhost:8501
+* Flask API: http://localhost:5000
+
+4. **Stop the services**:
+To shut down the containers, press Ctrl+C in your terminal or run:
+    ```bash
+    docker compose down
+    ```
+
+
+
+
+This project uses Docker Compose to manage the multi-container environment. Follow these steps to set up and run the service locally.
 
 1. **Clone the Repository**:
    ```bash
