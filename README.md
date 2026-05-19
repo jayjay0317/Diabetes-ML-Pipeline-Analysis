@@ -89,11 +89,11 @@ The final tuned Random Forest model demonstrates strong generalization and clini
 ## 🖥️ Implementation Highlights
 
 ### **Explainable AI (XAI)**
-The dashboard provides **Global Feature Importance** visualizations using Altair, helping users understand that `GenHlth` and `HighBP` are the primary risk drivers in the model.
+The dashboard provides Global Feature Importance visualizations using Altair to help users understand that general health perception (GenHlth) and high blood pressure (HighBP) act as the primary risk drivers inside the random forest model.
 
 ### **Human-Centric UX**
-- **Automatic BMI Calculation**: Simplifies the process by calculating BMI from user-provided height and weight.
-- **Risk Score System**: Translates raw ML probabilities into a **100-point Risk Score** for more intuitive communication of health risks.
+- **Automatic BMI Calculation**: Simplifies the user experience by calculating BMI from user-provided height and weight.
+- **Risk Score System**: Translates raw machine learning probabilities into an intuitive 100 point risk score system to communicate health risks clearly to non technical end users.
 
 ---
 
