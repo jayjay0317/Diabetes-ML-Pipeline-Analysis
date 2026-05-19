@@ -148,16 +148,13 @@ curl -X POST http://localhost:5000/predict \
   -d '{"features":[0,0,0,30,0,0,0,1,1,1,0,1,0,3,0,0,0,1,8,5,8]}'
 ```
 
-3. Expected Response:
+**Expected Response**:
 
 A successful request returns a JSON object with the prediction result:
 
 ```json
 {
-  "prediction": 0,
+  "high_risk_probability": 0.2794924733803663,
   "status": "success"
 }
 ```
-Where:
-- `0` = Normal
-- `1` = At Risk
