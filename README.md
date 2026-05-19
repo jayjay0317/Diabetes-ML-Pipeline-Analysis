@@ -76,10 +76,13 @@ The final tuned Random Forest model demonstrates strong generalization and clini
 
 ## 🧬 Project Structure
 
-- `notebooks/`: Contains EDA, data cleaning, and model optimization workflows.
-- `src/model_handler.py`: Core `DiabetesPredictor` class with feature importance logic.
-- `src/app.py`: Flask-based backend server providing the `/predict` REST API endpoint.
-- `src/streamlit_app.py`: Interactive web UI for real-time risk assessment and reviewer metrics.
+* `docker-compose.yml` defines the multi-container orchestration for frontend and backend services.
+* `Dockerfile.flask` configures the environment for the Flask API inference server.
+* `Dockerfile.streamlit` configures the environment for the interactive web dashboard application.
+* `notebooks/` contains exploratory data analysis, data cleaning, model optimization workflows, and the serialized `diabetes_rf_model.pkl` file.
+* `src/model_handler.py` holds the core `DiabetesPredictor` class with feature importance logic.
+* `src/app.py` runs the Flask API backend server providing the prediction endpoint.
+* `src/streamlit_app.py` runs the interactive Streamlit user interface for real-time risk assessment.
 
 ---
 
